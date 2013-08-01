@@ -19,7 +19,8 @@ func getBaseURL(apiKey string) (r string) {
 func getDataCenterViaApiKey(apiKey string) string {
 	ss := strings.Split(apiKey, `-`)
 	if len(ss) != 2 {
-		panic("wrong api key")
+		//panic("wrong api key")
+                return "us1"
 	}
 	return ss[1]
 }

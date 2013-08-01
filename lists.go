@@ -63,3 +63,17 @@ func (this *Pusher) ListUpdateMember(email string, mergeVars map[string]string, 
 	m["replace_interests"] = replace
 	return this.SendData("lists/update-member", m)
 }
+
+func ListAddMember(segId int, email string) (err error) {
+	return DefaultPusher.ListAddMember(segId, email)
+}
+
+func (this *Pusher) ListAddMember(segId int, email string) (err error) {
+	m := map[string]interface{}{}
+	m["seg_id"] = segId
+	m["batch"] = []map[string]string{
+		map[string]string{"email": email},
+	}
+
+	return this.SendData("lists/static-segment-members-add", m)
+}

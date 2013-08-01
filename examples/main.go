@@ -19,15 +19,16 @@ func main() {
 	//err := lemur.MergeVarAdd( "ORGNAME", "OrganizationName", nil)
 	//err := lemur.MergeVarDel( "ORGNAME")
 	//err := lemur.ListUpdateMember( lemur.NewMemberInput("a@theplant.jp", "", ""), []string{"First Name"}, "", true)
-	err := lemur.ListUpdateMember(
-		"athom@126.com",
-		map[string]string{
-			"FNAME": "xxm",
-			"LNAME": "y",
-		},
-		"text",
-		true,
-	)
+	//err := lemur.ListUpdateMember(
+	//"athom@126.com",
+	//map[string]string{
+	//"FNAME": "xxm",
+	//"LNAME": "y",
+	//},
+	//"text",
+	//true,
+	//)
+	err := lemur.ListAddMember(0, "athom@126.com")
 	if err != nil {
 		fmt.Println(err)
 	}
