@@ -20,7 +20,7 @@ func main() {
 	//err := lemur.MergeVarDel( "ORGNAME")
 	//err := lemur.ListUpdateMember( lemur.NewMemberInput("a@theplant.jp", "", ""), []string{"First Name"}, "", true)
 	err := lemur.ListUpdateMember(
-		map[string]string{"email": "athom@126.com"},
+		"athom@126.com",
 		map[string]string{
 			"FNAME": "xxm",
 			"LNAME": "y",

@@ -51,13 +51,13 @@ func (this *Pusher) MergeVarDel(tag string) (err error) {
 	return this.SendData("lists/merge-var-del", m)
 }
 
-func ListUpdateMember(email map[string]string, mergeVars map[string]string, emailType string, replace bool) (err error) {
+func ListUpdateMember(email string, mergeVars map[string]string, emailType string, replace bool) (err error) {
 	return DefaultPusher.ListUpdateMember(email, mergeVars, emailType, replace)
 }
 
-func (this *Pusher) ListUpdateMember(email map[string]string, mergeVars map[string]string, emailType string, replace bool) (err error) {
+func (this *Pusher) ListUpdateMember(email string, mergeVars map[string]string, emailType string, replace bool) (err error) {
 	m := map[string]interface{}{}
-	m["email"] = email
+	m["email"] = map[string]string{"email": email}
 	m["merge_vars"] = mergeVars
 	m["email_type"] = emailType
 	m["replace_interests"] = replace
