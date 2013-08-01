@@ -1,0 +1,14 @@
+# Lemur 
+
+Go based API for Mailchimp v2.0
+
+To run examples, set a couple env variables:
+
+```bash
+$ export MAILCHIMP_API_KEY=4bad4d3a5985f2e1a5a1c6660f0a86bf-us4
+$ export MAILCHIMP_LIST_ID=9386ce76fd
+```
+
+# Note
+
+Not all APIs are implemented. 
