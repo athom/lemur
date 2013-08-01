@@ -74,6 +74,7 @@ func (this *Pusher) Do(verb string, m interface{}, ech chan error) {
 		return
 	}
 	body, err := ioutil.ReadAll(resp.Body)
+	fmt.Println("Lemur response:")
 	fmt.Println(string(body))
 	if err != nil {
 		ech <- err
