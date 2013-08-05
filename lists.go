@@ -51,29 +51,62 @@ func (this *Pusher) MergeVarDel(tag string) (err error) {
 	return this.SendData("lists/merge-var-del", m)
 }
 
-func ListUpdateMember(email string, mergeVars map[string]string, emailType string, replace bool) (err error) {
-	return DefaultPusher.ListUpdateMember(email, mergeVars, emailType, replace)
+func ListUpdateMember(email string, mergeVars map[string]string) (err error) {
+	return DefaultPusher.ListUpdateMember(email, mergeVars)
 }
 
-func (this *Pusher) ListUpdateMember(email string, mergeVars map[string]string, emailType string, replace bool) (err error) {
+func (this *Pusher) ListUpdateMember(email string, mergeVars map[string]string) (err error) {
+	m := map[string]interface{}{}
+	m["email"] = map[string]string{"email": email}
+	m["merge_vars"] = mergeVars
+	m["email_type"] = ""
+	m["replace_interests"] = true
+	return this.SendData("lists/update-member", m)
+}
+
+func ListSubscribe(email string, mergeVars map[string]string) (err error) {
+	return DefaultPusher.ListSubscribe(email, mergeVars)
+}
+
+func (this *Pusher) ListSubscribe(email string, mergeVars map[string]string) (err error) {
+	return this.listSubscribe(
+		email,
+		mergeVars,
+		"text",
+		false,
+		false,
+		true,
+		false,
+	)
+}
+
+func (this *Pusher) listSubscribe(email string, mergeVars map[string]string, emailType string, doubleOpt bool, updateExisting bool, replaceInterests bool, sendWelcome bool) (err error) {
 	m := map[string]interface{}{}
 	m["email"] = map[string]string{"email": email}
 	m["merge_vars"] = mergeVars
 	m["email_type"] = emailType
-	m["replace_interests"] = replace
-	return this.SendData("lists/update-member", m)
+	m["double_optin"] = doubleOpt
+	m["update_existing"] = updateExisting
+	m["replace_interests"] = replaceInterests
+	m["send_welcome"] = sendWelcome
+
+	return this.SendData("lists/subscribe", m)
 }
 
-func ListAddMember(segId int, email string) (err error) {
-	return DefaultPusher.ListAddMember(segId, email)
+func ListUnsubscribe(email string) (err error) {
+	return DefaultPusher.ListUnsubscribe(email)
 }
 
-func (this *Pusher) ListAddMember(segId int, email string) (err error) {
+func (this *Pusher) ListUnsubscribe(email string) (err error) {
+	return this.listUnsubscribe(email, true, false, false)
+}
+
+func (this *Pusher) listUnsubscribe(email string, deleteMember bool, sendGoodbye bool, sendNotify bool) (err error) {
 	m := map[string]interface{}{}
-	m["seg_id"] = segId
-	m["batch"] = []map[string]string{
-		map[string]string{"email": email},
-	}
+	m["email"] = map[string]string{"email": email}
+	m["delete_member"] = deleteMember
+	m["send_goodbye"] = sendGoodbye
+	m["send_notify"] = sendNotify
 
-	return this.SendData("lists/static-segment-members-add", m)
+	return this.SendData("lists/unsubscribe", m)
 }
