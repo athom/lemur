@@ -42,6 +42,10 @@ func (this *Pusher) SetApiKey(apiKey string) {
 	this.apiKey = apiKey
 }
 
+func (this *Pusher) SetListId(listId string) {
+	this.listId = listId
+}
+
 type ResultError struct {
 	Type    string `json"type"`
 	Message string `json"message"`
