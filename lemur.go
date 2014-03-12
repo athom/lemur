@@ -24,7 +24,7 @@ func SetTimeOut(to time.Duration) {
 }
 
 func SetApiKey(apikey string) {
-	DefaultPusher.SetApiKey(key)
+	DefaultPusher.SetApiKey(apikey)
 }
 
 func NewPusher(token string) (r *Pusher) {
