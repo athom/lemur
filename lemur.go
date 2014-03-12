@@ -24,7 +24,7 @@ func SetTimeOut(to time.Duration) {
 }
 
 func SetApiKey(apikey string) {
-	DefaultPusher.apiKey = apikey
+	DefaultPusher.SetApiKey(key)
 }
 
 func NewPusher(token string) (r *Pusher) {
@@ -36,6 +36,10 @@ func NewPusher(token string) (r *Pusher) {
 type Pusher struct {
 	apiKey string
 	listId string
+}
+
+func (this *Pusher) SetApiKey(apiKey string) {
+	this.apiKey = apiKey
 }
 
 type ResultError struct {
