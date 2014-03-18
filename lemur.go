@@ -108,12 +108,12 @@ func (this *Pusher) Do(verb string, m interface{}, ech chan error) {
 	return
 }
 
-func (this *Pusher) SendData(verb string, m map[string]interface{}) (err error) {
+func (this *Pusher) SendData(listId string, verb string, m map[string]interface{}) (err error) {
 	if m["apikey"] == nil {
 		m["apikey"] = this.apiKey
 	}
 	if m["id"] == nil {
-		m["id"] = this.listId
+		m["id"] = listId
 	}
 
 	ech := make(chan error)

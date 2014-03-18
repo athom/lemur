@@ -1,20 +1,20 @@
 package lemur
 
-func Ping() (err error) {
-	return DefaultPusher.Ping()
+func Ping(listId string) (err error) {
+	return DefaultPusher.Ping(listId)
 }
 
-func (this *Pusher) Ping() (err error) {
+func (this *Pusher) Ping(listId string) (err error) {
 	m := map[string]interface{}{}
-	return this.SendData("helper/ping", m)
+	return this.SendData(listId, "helper/ping", m)
 }
 
-func AccountDetails(exclude []string) (err error) {
-	return DefaultPusher.AccountDetails(exclude)
+func AccountDetails(listId string, exclude []string) (err error) {
+	return DefaultPusher.AccountDetails(listId, exclude)
 }
 
-func (this *Pusher) AccountDetails(exclude []string) (err error) {
+func (this *Pusher) AccountDetails(listId string, exclude []string) (err error) {
 	m := map[string]interface{}{}
 	m["exclude"] = exclude
-	return this.SendData("helper/account-details", m)
+	return this.SendData(listId, "helper/account-details", m)
 }
