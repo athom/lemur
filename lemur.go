@@ -110,6 +110,10 @@ func (this *Pusher) Do(verb string, m interface{}, ech chan error) {
 }
 
 func (this *Pusher) SendData(listId string, verb string, m map[string]interface{}) (err error) {
+	if this.apiKey == "" {
+		return
+	}
+
 	if m["apikey"] == nil {
 		m["apikey"] = this.apiKey
 	}
